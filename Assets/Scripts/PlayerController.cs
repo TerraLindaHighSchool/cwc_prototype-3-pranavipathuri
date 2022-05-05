@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
             dirtParticle.Play();
+           
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -37,7 +39,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over!");
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
-            explosionParticle.Stop();
+            explosionParticle.Play();
+            dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 10f);
         }
     }
